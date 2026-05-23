@@ -6,8 +6,3 @@
 # Données brutes (optionnel - si tu ne veux pas les partager)
 data/raw/*.txt
 
-
-# Ou si tu veux ignorer seulement certains :
- colis.txt
- voyages.txt
- politiques.txt
