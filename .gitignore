@@ -12,6 +12,10 @@ ENV/
 env.bak/
 venv.bak/
 pythonenv*
+.env.example
+colis.txt
+voyages.txt
+politiques.txt
 
 # ============================================
 # Variables d'environnement et secrets
