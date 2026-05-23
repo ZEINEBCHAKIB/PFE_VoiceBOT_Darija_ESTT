@@ -1,4 +1,13 @@
+# Secrets
+.env
+.env.local
 .env.example
-colis.txt
-voyages.txt
-politiques.txt
+
+# Données brutes (optionnel - si tu ne veux pas les partager)
+data/raw/*.txt
+!data/raw/.gitkeep
+
+# Ou si tu veux ignorer seulement certains :
+ colis.txt
+ voyages.txt
+ politiques.txt
