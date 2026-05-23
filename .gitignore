@@ -1,7 +1,7 @@
 # Secrets
 .env
 .env.local
-.env.example
+
 
 # Données brutes (optionnel - si tu ne veux pas les partager)
 data/raw/*.txt
