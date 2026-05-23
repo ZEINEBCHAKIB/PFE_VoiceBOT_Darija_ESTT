@@ -1,0 +1,236 @@
+# THÈME   : politiques
+# SOURCE  : ctm.ma + ctm-messagerie.ma (scraping)
+# DATE    : 2026-04-24
+# MOTS    : 3822
+# ─────────────────────────────────────────────
+
+## ctm_cgv
+
+Conditions Générales de Vente
+Cher client, nous vous invitions à lire attentivement et comprendre ces conditions générales avant d’acheter votre billet. Ces conditions générales constituent le contrat d’achat et la possession du billet de voyage implique l’acceptation de ces conditions.
+Les billets sont délivrés par :
+Les guichets des agences CTM et points de ventes agréés,
+Internet (www.ctm.ma)
+Les prix indiqués sur les billets sont des prix TTC.
+Le voyageur est tenu de vérifier la monnaie rendue, la date et l’horaire demandés avant de quitter le guichet.
+Les voyageurs doivent conserver leurs billets durant le trajet et les présenter à toute réquisition : à la montée, à bord ou à la descente de l’autocar.
+Les enfants de moins de 4 ans sont transportés gratuitement à condition d’être tenus sur les genoux de leurs parents, à raison d’un enfant par adulte. A partir de 4 ans, les enfants paient le plein tarif.
+Aucun remboursement n’est possible en cas de baisse de tarifs.
+Le billet n’est valable que pour le trajet, la date et l’heure indiqués et ne peut être remboursé.
+Les billets non utilisés ne sont pas remboursés.
+Les voyageurs ayant droit à une réduction en raison de leur situation personnelle (Offre Famille ; conventionné, etc.) doivent obligatoirement présenter au moment de l’achat le document en vigueur prouvant qu’ils y ont droit. De même, au moment de l’embarquement dans l’autocar, le voyageur doit présenter ce document au personnel de la CTM. En cas de non-respect de cette exigence, le personnel de la CTM est tenu d’interdire l’utilisation du billet et il n’est en aucun cas possible de payer uniquement le complément tarifaire pour voyager, mais un nouveau billet à plein tarif doit être acheter s’il souhaite prendre l’autocar.
+Tout voyageur descendant avant le point de destination de son billet, perd le droit au parcours restant à effectuer.
+Une fois le siège sélectionné, le client se doit de respecter le numéro de place indiqué sur son billet de voyage
+Le billet ne peut être reporté que si la demande est effectuée au moins 12 heures avant le départ et sous réserve de disponibilité à la nouvelle date ou horaire
+En cas de modification ( Report de date – horaire – Gamme d’autocar ) d’un billet acheté avec une réduction tarifaire, le voyageur soit payer la différence entre le prix initial et le nouveau prix du billet.
+Billet sans option CTM Flex :
+Valable pour tout mode de paiement CTM y compris bons de transport
+Billet avec Option CTM Flex
+Valable uniquement pour les modes de paiement Espèce – Carte bancaire et bons d’achat.
+Le prix de l’assurance CTM Flex représente 5 % du prix du ticket avec un minimum de 10 dh
+Modification du billet CTM :
+La modification du billet CTM est valable pour les billets avec et sans option CTM Flex. Elle se fait en agence CTM, sur le site web de la CTM, dans les points de vente agréés et commissionnaires (pour le report de date – Horaire – Gamme d’autocar) en respectant les conditions suivantes :
+Ticket avec option CTM Flex
+2 modifications possibles
+au moins 12h avant départ
+Ticket sans option CTM Flex
+10 dh par modification
+Remboursement du billet CTM :
+Le remboursement des billets CTM est valable uniquement pour les billets avec option CTM Flex et se fait sous forme de bon d’achat CTM utilisable pour tout achat de billet de voyage ou de bagages.
+Le bon d’achat CTM n’est pas nominatif, et a une durée de validité de 6 mois. Le bon d’achat est envoyé au client par email ou imprimé directement en agence
+Le bon d’achat ne peut être utilisé qu’une seule fois. Si le bon d’achat n’est pas consommé totalement, le client ne peut être remboursé sur le reste du montant non consommé
+Tout billet CTM avec option Flex modifié 2 fois n’est plus remboursable
+Le prix de l’assurance CTM Flex n’est pas remboursable
+Le remboursement des billets CTM se fait selon les conditions suivantes
+Avec Option CTM FLEX
+Moins de 12h avant le départ
+Entre 12h et 24h avant le départ
+Plus de 24h avant le départ
+Sans Option CTM FLEX
+Le voyageur n’ayant pas de bagage à mettre dans la soute doit se présenter à l’agence d’embarquement au moins 15 min avant le départ. Le voyageur ayant des bagages doit se présenter au minimum 30 min avant le départ.
+Pour les voyages par correspondance, et uniquement en cas de retard à l’arrivé à une ville de changement la CTM se limitera le droit d’acheminer le voyageur vers les départs suivants selon la limite des places disponibles.
+La CTM ne pourra être tenu pour responsable des retards ou suppression de service dus à des événements indépendants de sa volonté (par exemple : les pannes mécaniques, les embouteillages, les accidents, les grèves, les conditions climatiques, les déviations, altération de l’état de santé du personnel de conduite, conflits sociaux, intervention des autorités civiles ou militaires, le fait d’un ou de plusieurs passagers, le fait d’un tiers, tout cas fortuit ou de force majeure) ou encore dictés par la nécessité d’assurer la sécurité des personnes transportées. Dans ces circonstances le voyage est reporté sans frais mais aucune indemnité ni remboursement ne seront accordés au client. En cas de retard à un aéroport, à une gare ou tout autre lieu de rendez-vous les éventuels frais d’hôtellerie, de restauration, de taxi ou de tout autre frais consécutifs à ce retard, ne seront pas pris en charge par notre société.
+La CTM s’engage à mettre en œuvre les moyens nécessaires pour pallier ces incidents et y remédier dans les meilleurs délais.
+Lors des arrêts pour pause-café ou restauration, le conducteur de l’autocar s’accorde le droit de repartir dans l’hypothèse ou un passager ne respecte pas la durée de l’arrêt fixé.
+Sur le réseau de lignes CTM, le transport des bagages est payant, les voyageurs sont autorisés à transporter deux bagages en soute (sacs ou valises) ; chaque bagage ne doit excéder 20 kg et la somme des trois dimensions (hauteur + largeur + profondeur) ne doit pas dépasser 170 cm.
+Les objets dépassant les dimensions ou le poids indiqué sont autorisés moyennant le paiement d’un supplément précisé sur notre Site internet ou en agence et dans la limite des places disponibles dans la soute des bagages
+L’achat du service bagage se fait en agence au moment de l’achat du billet ou 30 mn avant le départ, Le voyageur reçoit le ticket de paiement et les étiquettes. Ces dernières sont à coller sur les bagages.
+Tout Ticket Bagage ou étiquette perdus volés ou détruits ne sont ni remboursés ni dupliqués un nouvel achat bagage doit être effectuer.
+Les voyageurs peuvent déclarer la valeur des bagages.
+En cas de perte, de vol, d’endommagement ou d’avarie des bagages enregistrés et en l’absence de la valeur déclarée, l’indemnité réparatrice ne pourra excéder un montant de 100 DH par Ticket de bagage.
+En tout état de cause, la responsabilité de la CTM ne peut être engagée au-delà d’une valeur déclarée et justifiée de 2000 DH.
+Les bagages placés en soute doivent impérativement porter les étiquettes d’identification CTM.
+Lors des changements d’autocars dans le cas des correspondances, des arrêts techniques, etc,le voyageur ne doit rien laisser à bord de l’autocar. Par ailleurs, les bagages et leur transfert vers un autre autocar sont sous l’entière responsabilité du voyageur.
+Le voyageur est également autorisé à transporter à l’intérieur de l’autocar un bagage à mains d’une taille maximale de 40x50x16 cm. La CTM n’assume aucune responsabilité pour les bagages non transportés en soute. Le voyageur est responsable de la garde de ses bagages à mains, qui doivent rester sous sa surveillance pendant tout le trajet.
+Il est de la responsabilité du voyageur de retirer ses Bagages Enregistrés aussitôt qu’ils sont mis à sa disposition aux points de destination ou d’Arrêt volontaire. Les bagages ne seront remis que sur présentation du ticket de bagage.
+Toute réclamation pour perte, vol ou avarie de bagages muni d’une étiquette d’enregistrement doit être faite par le voyageur à l’arrivée au moment de leurs retrait et avant de quitter le lieu de débarquement auprès du conducteur et du personnel de l’agence CTM. La réclamation doit être accompagner de l’original de ticket d’enregistrement. A default aucune réclamation ne sera acceptée par la CTM.
+La CTM n’est pas responsable des bagages non retirés par le voyageur à l’arrivée.
+A la fin du voyage, le passager est tenu de s’assurer qu’aucun bagage, objet ou effet personnel n’est oublié à bord.
+Conditionnement des bagages.
+a) Les bagages devront être verrouillés et correctement conditionnés afin de protéger leur contenu et de manière à résister à une manutention normale.
+b) Le conditionnement des bagages est sous l’entière responsabilité des voyageurs. Ils seront responsables en cas de dommages causés par leurs bagages à des tiers (personnes ou biens).
+La CTM décline toute responsabilité relative aux bagages non enregistrés, aux objets manquants se trouvant dans un bagage non verrouilléet en cas d’endommagement si les voyageurs ont mal conditionné leurs bagages.
+c) Le transport de produits illicites ou inflammables est strictement interdit (armes à feu, armes blanches, objets contondants, substances et matières dangereuses, toxiques, polluants, etc.).
+d) Il est conseillé aux voyageurs d’éviter d’inclure dans ses Bagages des articles fragiles, périssables ou des articles de valeur tels que : de l’argent, des bijoux, des objets d’art, des métaux précieux, de l’argenterie, des valeurs ou autres objets précieux, des appareils d’optique ou de photo, des ordinateurs, des matériels ou appareils électroniques et/ou de télécommunication, des instruments de musique, des passeports et pièces d’identité, des clés, des papiers d’affaires, manuscrits ou titres, individualisés, etc.
+e) La CTM se réserve le droit de refuser les bagages dont les dimensions ou la nature ne respectent pas les conditions indiquées ci-dessus.
+Réclamations et information
+Pour permettre aux passagers communiquer rapidement avec CTM un numéro centre d’appel est à leur disposition au 0800 0900 30, ou en visitant notre site web
+Vous pouvez aussi adresser votre réclamation par courrier recommandé à l’adresse suivante : KM 13,5 Autoroute Casa-Rabat Sidi Bernoussi Casablanca, elle doit être accompagnée du billet et autres justificatifs
+Prescriptions particulières :
+Il est interdit de :
+Fumer dans les véhicules,
+Gêner la conduite et parler au conducteur durant le voyage,
+Manœuvrer les issues de secours (sauf cas d’accident),
+Faire obstacle à la manœuvre des portes,
+Dégrader les installations du véhicule et des agences,
+Gêner le confort des autres voyageurs,
+Transporter des articles susceptibles de présenter des risques pour la sureté et la sécurité des voyageurs : liquides, ou produits inflammables, armes, denrées périssables, gaz comprimé… n’hésitez pas à vous adresser au personnel de bord en cas de doute
+Transporter des animaux en soute ou à bord de l’autocar
+La CTM vous remercie pour votre confiance et vous souhaite bon voyage
+Politique de gestion des données personnelles
+Nous prenons la question des données personnelles très au sérieux, car elle mérite de l’être.
+Nous savons que vos données personnelles, et surtout comment vous les partagez, sont extrêmement importantes. C’est pourquoi nous nous engageons à quatre promesses en termes de confidentialité afin de protéger vos données.
+Nous ferons toujours preuve de transparence à propos des données personnelles que nous utilisons : vous saurez comment et surtout pourquoi nous en avons besoin.
+Nous n’utiliserons vos données personnelles que si nous en avons réellement besoin.
+Nous protégerons vos données personnelles en utilisant la meilleure combinaison possible de technologie, personnes et procédés.
+Nous souhaitons que vous puissiez choisir comment vos données personnelles sont utilisées, en toute connaissance de cause. Nous avons donc rédigé notre politique de confidentialité de manière lisible, en évitant tout jargon.
+À chaque fois que vous utilisez nos services sur notre site internet , nous protégerons vos données personnelles de la manière énoncée dans notre Politique de Confidentialité et conformément à nos promesses (voir les détails ci-dessous).
+Politique de confidentialité des données
+
+
+## ctm_conditions
+
+Candidature spontanée
+Conditions générales de vente
+La présente déclaration vaudra contrat entre l’expéditeur et CTM Messagerie. En signant la présente déclaration, l’expéditeur accepte les conditions ci-après et engage sa responsabilité sur les informations mentionnées. La déclaration d’expédition fait foi de bon de commande pour les expéditions des clients en compte.
+Obligations de l’expediteur
+L’expéditeur est responsable des mentions portées sur la déclaration. Le nom, le numéro de téléphone et l’adresse du destinataire doivent être exacts et complets afin de permettre une livraison dans des conditions normales.
+La déclaration doit porter la signature de l’expéditeur ainsi que son numéro de la CIN, et ce dernier est responsable de la nature et de la valeur de la marchandise mentionnée sur la déclaration.
+Pour les sociétés, la déclaration doit porter le cachet commercial.
+CTM Messagerie ne peut prendre en considération aucun ajout et /ou modification manuscrite par le client du texte pré imprimé de la déclaration et en dégage toute responsabilité.
+Nature de la marchandise
+CTM Messagerie se réserve le droit de refuser toute marchandise susceptible d’altérer et d’endommager d’autres marchandises et équipements.
+Aussi, il est strictement interdit que le colis contienne de la contre bande, l’argent et les pierres précieuses, les pièces d’identités les documents compromettant l’intégrité territoriale ou tout objet pouvant présenter un danger pour le personnel de la société. De la drogue ou des matières inflammables, corrosives, explosives ou qui par leur odeur ou par leur composition pourraient causer des accidents ou avaries. Une telle éventualité ferait l’objet d’un constat d’expert et de poursuite en dommage exercé contre l’expéditeur.
+La CTM Messagerie n’est pas responsable du contenu des colis.
+Le poids des colis doit être supérieur à 1 kg.
+Les colis sont conditionnés par l’expéditeur dans un emballage, fermé résistant, approprié au contenu et aux exigences du transport et doivent supporter des empilements. A défaut, le colis voyage à ses risques et périls. CTM Messagerie ne saurait être tenue pour responsable de dommage lié à une insuffisance d’emballage. Les références de l’expéditeur et du destinataire doivent être visiblement mentionnées sur tous les colis.
+Une gamme d’emballage est disponible à la vente dans les guichets de la CTM Messagerie pour acheminer les colis dans les meilleures conditions
+CTM Messagerie ne peut être tenue pour responsable de la casse en cas de transport des colis contenant des marchandises en verres ou autre matériau très fragile et dont la déclaration porte un cachet « sans garantie de casse »
+Les colis transportés sont assurés à hauteur de la valeur déclarée.
+Faute de quoi, le remboursement se fera sur la base de 100,00dhs.
+La valeur déclarée ne doit en aucun cas dépasser la valeur de 20000.00 dhs par déclaration. Pour les montants supérieurs, contacter le chef d’agence.
+Expeditions contre retour de fonds
+La remise du chèque à l’expéditeur ne sera effectuée qu’après encaissement par CTM Messagerie.
+Les chèques contre remboursements remis à l’expéditeur sont barrés et non endossables.
+CTM Messagerie ne remboursera en aucun cas le montant du contre remboursement en cas de refus de retrait des colis par le destinataire.
+En cas de perte ou d’avarie le montant du contre remboursement ne vaut pas celui de la valeur déclarée.
+Le retrait des chèques, traites ou bons de livraison se fait sur présentation :
+La souche jaune de la déclaration d’expédition.
+Pour les sociétés : cachet de la société + carte d’identité nationale de la personne effectuant le retrait.
+Pour les particuliers : carte d’identité nationale de l’expéditeur.
+L’accusé de réception par le destinataire, sans aucune réserve, dégage toute responsabilité de CTM Messagerie.
+Les réclamations doivent parvenir au service réclamation dans un délai de 15 jours qui suivent la date d’expédition. Faute de quoi, ladite réclamation ne sera pas prise en considération.
+La CTM Messagerie dégage toute responsabilité, en cas de réclamation après la livraison.
+Remboursement de la reclamation
+Le remboursement de la réclamation se fait au prorata de la valeur déclarée.
+La demande de preuve de livraison doit être faite dans les 6 mois qui suivent la date d’expédition, au-delà de cette durée, aucune demande ne sera traitée.
+Donnees personnelles
+En renseignant vos données à caractère personnel sur la déclaration, vous acceptez que la CTM Messagerie les traite dans le cadre de l’exercice de son activité, à savoir : l’acheminement des colis à destination.
+Ces données sont transmises à des sous-traitants et aux autorités compétentes en cas de besoin.
+CTM-MESSAGERIE dispose des autorisations de la CNDP sous N° A-GC-216/2019 et T-I-101/2019 du 26/03/2021
+Réglement des litiges
+Le tribunal du commerce de Casablanca est seul compétent à statuer sur les litiges qui résultent de l’application de ce contrat
+Les conditions générales présentées ci-dessus sont applicable également à l’ensemble des expéditions exprimées soit par Intégration de fichier électronique ou guichet dématérialisé ou interface web ou application mobile.
+Vous pouvez suivre votre colis à tout moment grâce au numéro inscrit sur la déclaration d'expédition
+sur les réseaux sociaux
+- Tous droits réservés.
+
+
+## ctm_agances
+
+34 BD ABDERRAHIM BOUABID
+AV HASSAN II – LOT RIAD 3 BLOC 1
+94 BD AL MOKHTAR SOUSSI.
+GARE ROUTIERE MUNICIPALE. GR CALABONITA
+BD MED 5 – RESIDENCE AMIRAL
+: GARE ROUTIERE MUNICIPALE
+GARE ROUTIERE MUNICIPALE.
+: GARE CTM 23 RUE LEON
+: 22 RUE GEORGE SAND
+: MG8 Rte de Rabat – les Jardins de Ain Sébaa
+HAY ESSALAM IMM EL JOUMANI
+GARE ROUTIERE MUNICIPALE
+: 8 RUE BIR ANZARANE
+: GARE ROUTIERE MUNICIPALE.
+PLACE 11 JANVIER LOT AZLIF
+GARE CTM ATLAS EN FACE TRIBUNAL 1er INSTANCE
+Av Mly Rachid N° 207-209-211
+BD ABOUBAKER SEDDIK ET ZINEB NEFZAOUIA
+AV DES FAR – Rte de Fès
+47 RUE GENERAL AMEZIANE
+Agence CTM 12 RUE SIDI BRAHIM
+NV GARE ROUTIERE MUNICIPALE .
+Lotissement Al Majd, Route de Tétouan, Mghougha, Tanger
+N1 LOT SAADAOUI – Bd Med Hafidi RTE TAFRAOUT
+*Offres soumises à conditions, pour plus d’informations, consulter les règlement de jeu
+
+
+## ctm_faq
+
+les réponses à vos questions.
+VOUS AVEZ UNE QUESTION ?
+Votre réponse se trouve peut être déjà ici
+Puis-je modifier mon ticket CTM ?
+La modification du ticket est possible sur notre site ou en agence jusqu’à 12 heures avant le voyage.
+Puis-je effectuer un remboursement de ticket ?
+Les tickets CTM ne sont pas remboursables conformément aux conditions générales de vente.
+J'ai rencontré un problème lors de mon achat en ligne, que faire ?
+Pour toute aide, vous pouvez laisser un message
+ou joindre notre centre de relation clientèle au 0800090030 de 08h à 22h.
+Dois-je imprimer mon e-ticket CTM ?
+L’impression du ticket n’est pas nécessaire. Le voyageur peut se présenter le jour de son voyage en agence avec son e-billet CTM.
+Je voyage avec bébé, que dois-je savoir ?
+Un bébé âgé de moins de 4 ans ne paye pas de ticket. Durant tout le trajet, le bébé doit rester assis sur les genoux de la personne qui l’accompagne, à raison d’un enfant par adulte.
+Puis-je acheter un ticket pour quelqu'un d'autre ?
+L’achat de ticket pour une autre personne est possible à condition de communiquer les informations nécessaires du voyageur (nom, prénom, CIN, email, télephone)
+Où puis-je acheter mon ticket CTM ?
+Les tickets CTM sont vendus sur le site ctm.ma, le réseau de vente physique (agences et gares routières CTM) ou nos partenaires CTM (M2T, Mazma…)
+Je voyage avec un enfant que dois-je savoir ?
+À partir de 4 ans, un enfant occupe une place assise dans les autocars CTM. Il doit payer un billet plein tarif.
+Puis-je connaitre l’itinéraire et les arrêts durant le trajet ?
+L’itinéraire du voyage est spécifié sur le site web lors de l’achat du billet. Vous pouvez consulter le détail des arrêts en choisissant votre départ.
+Puis-je acheter un ticket CTM à distance ?
+Il est possible d’envoyer un ticket acheté vers autre agence pour que le voyageur récupère son billet dans une autre ville ou seulement prendre une photo du ticket et l’envoyer au voyageur.
+Si je perds mon billet CTM que dois-je faire ?
+Le client peut se présenter en agence CTM pour récupèrer son billet à travers son nom et son prénom.
+Vous n’avez pas trouvé de réponses à vos questions ?
+ou appelez notre centre de relation clientèle
+Qu’est ce que je ne peux pas transporter avec moi en autocar ?
+Les types d’objets interdits en autocar sont listés au niveau des Conditions bagages sur le lien suivant:
+Conditions de vente et bagages
+Puis-je déposer mes bagages à l’avance en agence ?
+Les bagages ne peuvent être déposés qu’ au moment de l’embarquement au pied de l’autocar pour un chargement en soute.
+Quelle est la dimension du bagage à main autorisé à l’intérieur autocar ?
+Le voyageur est autorisé à transporter à l’intérieur de l’autocar un bagage à mains d’une taille maximale de 40x50x16 cm.
+Combien coute un bagage avec CTM ?
+Un bagage avec CTM coûte à partir de 5 Dh jusqu’a 20 kg maximum, Dans le cas ou le bagage dépasse les 20 Kg le prix est calculé sur place en agence.
+Je veux envoyer un colis avec CTM , que faire ?
+Pour envoyer vos colis partout au Maroc, dirigez vous vers l’agence CTM Messagerie la plus proche, plus d’information sur www.ctm-messagerie.ma
+Combien de kilos puis-je transporter avec moi lors de mon voyage ?
+Les voyageurs sont autorisés à transporter deux bagages en soute (sacs ou valises) ; chaque bagage ne doit excéder 20 kg et la somme des trois dimensions (hauteur + largeur + profondeur) ne doit pas dépasser 170 cm.
+Dois-je souscrire à une assurance pour mon bagage ?
+L’assurance pour les bagages n’est pas obligatoire, Le client peut déclarer jusqu’à un montant de 5000 dh de valeur réelle du bagage. En l’absence de la valeur declarée et en cas de perte, le montant de l’indémnisation sera de 100 DH.
+Je souhaite déposer une réclamation, où puis-je le faire ?
+Pour les réclamations concernant l’endommagement ou perte de bagage, celle ci doit se faire à l’arrivée au pied de l’autocar en préscence du chauffeur, pour les autres types de réclamations liées au retard ou autres les clients peuvent déposer la réclamation en agence via le centre d’appel ou site web CTM sur
+Formulaire de contact
+Quelles sont les règles de sécurité à bord de l'autocar?
+Attachez votre ceinture de sécurité à bord durant tout le trajet,
+Eviter de circuler à l’interieur de l’autocar -Mettre les bagages à main dans le compartiment à bagages,
+En cas d’urgence suivre les consignes de secours affichées à l’intérieur de l’autocar.
+Comment accéder au portail de divertissement à bord CTM PLAY ?
+1- Activez votre wifi et choisissez le réseau : CTM-PLAY au niveau de notre autocar PREMIUM. Allez sur :
+2- Téléchargez l’application AZIMUT OD depuis votre playstore et app store et choisissez votre divertissement préferé.
+Comment louer un autocar CTM?
+Particulier ou entrepirse, envoyez votre demande avec tous les détails de prestation en remplissant le formulaire, notre équipe commerciale donnera suite dans les 24h qui suivent.
+Quelles sont les mesures sanitaires CTM spéciales Covid 19 ?
+Retrouvez ici toutes les informations sur les mesures sanitaires prises par CTM face au COVID-19 pour voyager en toute sécurité !
