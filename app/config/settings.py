@@ -23,47 +23,46 @@ for d in [DATA_DIR, RAW_DATA_DIR, INDEX_DIR, MODELS_DIR]:
 
 class Config:
     """Configuration principale"""
-    
+
     # ========== MODÈLES ==========
     EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL", "BAAI/bge-m3")
-    GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-2.0-flash")
-    
+    OPENAI_MODEL = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
+
     # ========== RAG ==========
     VECTOR_SIZE = 1024  # Dimension BGE-M3
     CHUNK_SIZE = 500
     CHUNK_OVERLAP = 50
     TOP_K = 3
     SIMILARITY_THRESHOLD = 0.55  # Seuil ajusté pour darija
-    
+
     # ========== QDRANT ==========
     QDRANT_COLLECTION = "ctm_documents"
     QDRANT_MODE = os.getenv("QDRANT_MODE", "memory")  # "memory", "local", "cloud"
     QDRANT_PATH = str(INDEX_DIR / "qdrant_storage")
-    
+
     # ========== API KEYS ==========
-    GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
-    
+    OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
+
     # ========== FICHIERS ==========
     DOCUMENTS = {
         "colis": RAW_DATA_DIR / "colis.txt",
         "voyages": RAW_DATA_DIR / "voyages.txt",
         "politiques": RAW_DATA_DIR / "politiques.txt",
     }
-    
+
     METADATA_PATH = INDEX_DIR / "chunks_metadata.json"
-    
+
     @classmethod
     def validate(cls):
         """Vérifier la configuration"""
         errors = []
-        if not cls.GEMINI_API_KEY:
-            errors.append("GEMINI_API_KEY non définie")
-        
-        # Vérifier les fichiers documents
+        if not cls.OPENAI_API_KEY:
+            errors.append("OPENAI_API_KEY non définie")
+
         for name, path in cls.DOCUMENTS.items():
             if not path.exists():
                 errors.append(f"Fichier {name} non trouvé: {path}")
-        
+
         return errors
 
 

@@ -136,7 +136,7 @@ def main():
     print(f"📏 Longueur moyenne: {sum(len(t) for t in texts)/len(texts):.0f} caractères")
     
     encode_start = time.time()
-    embeddings = embedding_model.encode(texts, batch_size=16, show_progress=True)
+    embeddings = embedding_model.encode(texts, batch_size=16)
     encode_time = time.time() - encode_start
     
     print(f"✅ Encodage terminé: {len(embeddings)} vecteurs de dimension {len(embeddings[0])}")
@@ -154,7 +154,7 @@ def main():
         store.client.delete_collection(config.QDRANT_COLLECTION)
     
     # Créer la nouvelle collection
-    store.create_collection()
+    store._init_collection()
     
     # Préparer et uploader les points
     print("📤 Upload des vecteurs vers Qdrant...")

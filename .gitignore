@@ -6,3 +6,7 @@
 # Données brutes (optionnel - si tu ne veux pas les partager)
 data/raw/*.txt
 
+venv/
+__pycache__/
+data/qdrant/
+.cache/

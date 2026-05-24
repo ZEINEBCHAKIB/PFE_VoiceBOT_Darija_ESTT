@@ -23,7 +23,7 @@ class QdrantStore:
         if self._initialized:
             return
         
-        self.client = QdrantClient(":memory:")
+        self.client = QdrantClient(path="data/qdrant")
         self.collection_name = config.QDRANT_COLLECTION
         self.embedding_model = get_embedding_model()
         
