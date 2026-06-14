@@ -10,3 +10,19 @@ venv/
 __pycache__/
 data/qdrant/
 .cache/
+
+# TTS audio and checkpoints
+data/audio/**/wav/
+*.wav
+models/tts_lora/
+*.safetensors
+*.ckpt
+*.gguf
+
+# Python cache
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Secrets
+.env
