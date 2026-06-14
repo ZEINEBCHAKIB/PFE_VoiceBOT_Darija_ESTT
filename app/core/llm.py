@@ -1,18 +1,20 @@
 """
-Gestion du LLM (OpenAI) pour le RAG
+Gestion du LLM (Google Gemini) pour le RAG
+3 clés API indépendantes — une par usage
 """
 import logging
 import os
 import time
 from typing import Optional
 
-from openai import OpenAI
+from google import genai
+from google.genai import types
 
 logger = logging.getLogger(__name__)
 
 
 class LLMClient:
-    """Client pour OpenAI API"""
+    """Client Gemini avec 3 clés API indépendantes"""
 
     _instance = None
 
@@ -26,58 +28,47 @@ class LLMClient:
         if self._initialized:
             return
 
-        api_key = os.getenv("OPENAI_API_KEY")
-        if not api_key:
-            raise ValueError("❌ OPENAI_API_KEY manquante dans les variables d'environnement")
+        # ── Clé 1 : Traduction ──
+        key_translation = os.getenv("GEMINI_API_KEY_TRANSLATION")
+        if not key_translation:
+            raise ValueError("❌ GEMINI_API_KEY_TRANSLATION manquante")
+        self.client_translation = genai.Client(api_key=key_translation)
 
-        self.client = OpenAI(api_key=api_key)
-        self.model = "gpt-4o-mini"
+        # ── Clé 2 : Génération RAG ──
+        key_generation = os.getenv("GEMINI_API_KEY_GENERATION")
+        if not key_generation:
+            raise ValueError("❌ GEMINI_API_KEY_GENERATION manquante")
+        self.client_generation = genai.Client(api_key=key_generation)
+
+        self.model = "gemini-3.5-flash"
         self._initialized = True
-        logger.info(f"✅ OpenAI {self.model} configuré")
+        logger.info(f"✅ LLMClient initialisé — 2 clés (traduction + génération)")
 
-    def generate(self, prompt: str, max_retries: int = 3) -> Optional[str]:
-        """Génère une réponse avec OpenAI"""
+    def _call(self, client: genai.Client, prompt: str, temperature: float = 0.3, max_retries: int = 3) -> Optional[str]:
+        """Méthode interne générique pour appeler un client Gemini"""
         for attempt in range(max_retries):
             try:
-                response = self.client.chat.completions.create(
+                response = client.models.generate_content(
                     model=self.model,
-                    messages=[{"role": "user", "content": prompt}],
-                    temperature=0.3,
+                    contents=prompt,
+                    config=types.GenerateContentConfig(temperature=temperature)
                 )
-                return response.choices[0].message.content
+                return response.text
             except Exception as e:
                 logger.warning(f"Tentative {attempt + 1}/{max_retries} échouée: {e}")
                 if attempt < max_retries - 1:
                     time.sleep(2 ** attempt)
                 else:
-                    logger.error(f"Erreur OpenAI après {max_retries} tentatives: {e}")
+                    logger.error(f"Erreur après {max_retries} tentatives: {e}")
                     return None
         return None
 
-    def rag_generate(self, query: str, context: str) -> str:
-        """Génère une réponse RAG en darija"""
-        prompt = f"""Tu es un assistant du centre d'appel CTM (transport et logistique au Maroc).
-Tu dois répondre en darija marocaine UNIQUEMENT en utilisant les informations du contexte ci-dessous.
-
-RÈGLES IMPORTANTES:
-1. Réponds UNIQUEMENT en darija marocaine (lettres arabes pures)
-2. Utilise un ton professionnel et courtois comme un call center
-3. Sois concis (2-3 phrases maximum)
-4. Si l'information n'est pas dans le contexte, dis: Désolé، ما عنديش هاد المعلومة
-
-CONTEXTE:
-{context}
-
-QUESTION:
-{query}
-
-RÉPONSE EN DARIJA MAROCAINE:"""
-
-        response = self.generate(prompt)
-        return response or "Désolé، وقع مشكل تقني."
+    def generate(self, prompt: str, max_retries: int = 3) -> Optional[str]:
+        """Génération générale — utilise client_generation"""
+        return self._call(self.client_generation, prompt, max_retries=max_retries)
 
     def translate_to_french(self, darija_query: str) -> str:
-        """Traduit une requête darija vers français"""
+        """Traduit darija → français — utilise GEMINI_API_KEY_TRANSLATION"""
         prompt = f"""Traduis la phrase suivante du darija marocain vers le français.
 Réponds UNIQUEMENT par la traduction, sans aucune explication.
 
@@ -86,12 +77,59 @@ Phrase en darija:
 
 Traduction française:"""
 
-        response = self.generate(prompt)
+        response = self._call(self.client_translation, prompt, temperature=0.1)
         if response:
             return response.strip().strip('"').strip("'")
         return darija_query
 
 
+    def rag_generate_with_history(self, query: str, context: str, history_text: str = "") -> str:
+        is_first_turn = len(history_text.strip()) == 0
+        prompt = f"""Tu es un agent professionnel du centre d'appel CTM (transport au Maroc).
+Réponds en darija marocaine (lettres arabes uniquement).
+
+RÈGLES:
+1. Réponds UNIQUEMENT en darija marocaine
+2. Ton professionnel et courtois comme un vrai agent call center
+3. Sois concis (2-3 phrases)
+4. Tiens compte de l'historique pour une conversation naturelle
+5. Si l'info manque: سمحلي، ما عنديش هاد المعلومة
+6. {"يمكنك البدء بتحية قصيرة" if is_first_turn else "⚠️ NE PAS commencer par مرحبا ou أهلا — continue la conversation directement"}
+7. Ne répète JAMAIS une salutation si elle existe déjà dans l'historique
+{history_text}
+CONTEXTE CTM:
+{context}
+
+QUESTION ACTUELLE:
+{query}
+
+RÉPONSE EN DARIJA:"""
+
+        response = self._call(self.client_generation, prompt, temperature=0.3)
+        return response or "سمحلي، وقع مشكل تقني."
+
+    def generate_welcome(self) -> str:
+        """Génère un message de bienvenue naturel et varié"""
+        prompt = """Tu es un agent du centre d'appel CTM (transport au Maroc).
+Génère UN message de bienvenue court et naturel en darija marocaine (lettres arabes).
+
+RÈGLES:
+1. Varie le message à chaque fois (ne répète pas toujours la même phrase)
+2. Sois chaleureux et professionnel comme un vrai agent call center
+3. Maximum 2 phrases
+4. Mentionne CTM naturellement
+5. Termine par une invitation à parler
+
+Exemples de variations possibles:
+- صباح الخير، أهلا بيك في CTM، كيفاش نقدر نخدمك؟
+- مرحبا، وصلتي لـ CTM، أنا هنا باش نساعدك، واش عندك شي سؤال؟
+- أهلا وسهلا في CTM، كيف نقدر نكون مفيد ليك اليوم؟
+
+GÉNÈRE UN NOUVEAU MESSAGE (différent des exemples):"""
+
+        response = self._call(self.client_generation, prompt, temperature=0.9)
+        return response or "مرحبا بك في CTM، كيفاش نقدر نساعدك؟"
+
 def get_llm_client() -> LLMClient:
-    """Obtenir l'instance du client LLM"""
+    """Retourne l'instance unique du client LLM"""
     return LLMClient()
