@@ -1,0 +1,49 @@
+FROM python:3.11-slim AS builder
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y \
+    libsndfile1 \
+    ffmpeg \
+    libgomp1 \
+    git \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY requirements.docker.txt .
+
+RUN pip install --upgrade pip && \
+    pip install torch torchaudio --index-url https://download.pytorch.org/whl/cu121 && \
+    pip install --no-cache-dir -r requirements.docker.txt
+
+FROM python:3.11-slim AS runtime
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y \
+    libsndfile1 \
+    ffmpeg \
+    libgomp1 \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY --from=builder /usr/local/lib/python3.11/site-packages /usr/local/lib/python3.11/site-packages
+COPY --from=builder /usr/local/bin /usr/local/bin
+
+COPY . .
+
+RUN mkdir -p data/raw data/index data/qdrant models/wav2vec2-darija logs app/database
+
+ENV NVIDIA_VISIBLE_DEVICES=all
+ENV NVIDIA_DRIVER_CAPABILITIES=compute,utility
+ENV CUDA_VISIBLE_DEVICES=0
+ENV PYTHONUNBUFFERED=1
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV TRANSFORMERS_OFFLINE=0
+ENV HF_HUB_OFFLINE=0
+
+EXPOSE 8000
+
+RUN chmod +x scripts/docker-entrypoint.sh
+
+ENTRYPOINT ["bash", "scripts/docker-entrypoint.sh"]
