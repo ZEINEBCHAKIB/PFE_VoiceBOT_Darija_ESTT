@@ -33,20 +33,14 @@ class MCPServer:
             raise ValueError("❌ GEMINI_API_KEY_ROUTER manquante")
 
         self.client = genai.Client(api_key=api_key)
-
         self._tools: Dict[str, dict] = {}
         self._register_default_tools()
 
         self._initialized = True
         logger.info(f"✅ MCP Server initialisé — {len(self._tools)} tool(s) enregistré(s)")
 
-    # ──────────────────────────────────────────────
-    # Enregistrement des tools
-    # ──────────────────────────────────────────────
-
     def _register_default_tools(self):
 
-        # ── Tool 1 : RAG (inchangé) ──────────────────────────────
         self.register_tool(
             name="rag_search",
             description=(
@@ -68,7 +62,6 @@ class MCPServer:
             }
         )
 
-        # ── Tool 2 : DB CTM (nouveau) ─────────────────────────────
         self.register_tool(
             name="ctm_db_query",
             description=(
@@ -135,7 +128,6 @@ class MCPServer:
             }
         )
 
-        # ── Tool 3 : RAG Stats (inchangé) ────────────────────────
         self.register_tool(
             name="rag_stats",
             description="Statistiques du système RAG (nombre de documents indexés, etc.)",
@@ -156,10 +148,6 @@ class MCPServer:
         }
         logger.debug(f"📦 Tool enregistré: {name}")
 
-    # ──────────────────────────────────────────────
-    # Routing LLM
-    # ──────────────────────────────────────────────
-
     def _build_tools_schema_for_prompt(self) -> str:
         schema = []
         for tool in self._tools.values():
@@ -170,18 +158,17 @@ class MCPServer:
             })
         return json.dumps(schema, ensure_ascii=False, indent=2)
 
-def _select_tool(self, user_query: str, memory=None) -> dict:
-    """Le LLM router reçoit aussi l'historique pour comprendre le contexte"""
+    def _select_tool(self, user_query: str, memory=None) -> dict:
+        """Le LLM router reçoit aussi l'historique pour comprendre le contexte"""
 
-    # Historique formaté pour le router
-    history_text = ""
-    if memory and not memory.is_empty():
-        history_text = f"""
+        history_text = ""
+        if memory and not memory.is_empty():
+            history_text = f"""
 HISTORIQUE DE LA CONVERSATION (pour comprendre le contexte):
 {memory.format_as_text()}
 """
 
-    prompt = f"""Tu es un router intelligent pour un call center CTM (transport au Maroc).
+        prompt = f"""Tu es un router intelligent pour un call center CTM (transport au Maroc).
 Ton rôle est UNIQUEMENT de choisir le bon tool selon la question ET le contexte de la conversation.
 
 TOOLS DISPONIBLES:
@@ -196,67 +183,64 @@ Réponds UNIQUEMENT en JSON valide, sans markdown:
 {{"tool": "nom_du_tool", "params": {{...paramètres...}}}}
 
 Exemples avec contexte:
-- Historique: "horaires من كازا" → Question: "الرباط" 
+- Historique: "horaires من كازا" → Question: "الرباط"
   → {{"tool": "ctm_db_query", "params": {{"action": "horaires", "ville_depart": "Casablanca", "ville_arrivee": "Rabat"}}}}
 - Historique: "tarifs طنجة-كازا" → Question: "وكونفور؟"
-  → {{"tool": "ctm_db_query", "params": {{"action": "tarifs", "ville_depart": "Tanger", "ville_arrivee": "Casablanca", "classe": "CONFORT"}}}}
+  → {{"tool": "ctm_db_query", "params": {{"action": "tarifs", "ville_depart": "Tanger", "ville_arrivee": "Casablanca"}}}}
 - Historique: vide → Question: "شحال الثمن من فاس لوجدة؟"
   → {{"tool": "ctm_db_query", "params": {{"action": "tarifs", "ville_depart": "Fès", "ville_arrivee": "Oujda"}}}}
 """
+        try:
+            response = self.client.models.generate_content(
+                model="gemini-3.1-flash-lite",
+                contents=prompt,
+                config=types.GenerateContentConfig(temperature=0.1)
+            )
 
-    try:
-        response = self.client.models.generate_content(
-            model="gemini-3.5-flash",
-            contents=prompt,
-            config=types.GenerateContentConfig(temperature=0.1)
-        )
+            raw = response.text.strip().removeprefix("```json").removesuffix("```").strip()
+            result = json.loads(raw)
 
-        raw = response.text.strip().removeprefix("```json").removesuffix("```").strip()
-        result = json.loads(raw)
+            logger.info(f"🧭 Tool sélectionné : {result['tool']} | params : {result['params']}")
+            return result
 
-        logger.info(f"🧭 Tool sélectionné : {result['tool']} | params : {result['params']}")
-        return result
+        except json.JSONDecodeError as e:
+            logger.error(f"❌ Erreur parsing JSON router: {e}")
+            return {"tool": "rag_search", "params": {"query": user_query}}
 
-    except json.JSONDecodeError as e:
-        logger.error(f"❌ Erreur parsing JSON router: {e}")
-        return {"tool": "rag_search", "params": {"query": user_query}}
+        except Exception as e:
+            logger.error(f"❌ Erreur router LLM: {e}")
+            return {"tool": "rag_search", "params": {"query": user_query}}
 
-    except Exception as e:
-        logger.error(f"❌ Erreur router LLM: {e}")
-        return {"tool": "rag_search", "params": {"query": user_query}}
+    def call_tool(self, user_query: str, memory=None) -> Dict[str, Any]:
+        try:
+            routing = self._select_tool(user_query, memory)
+            tool_name = routing["tool"]
+            params = routing["params"]
+            params["memory"] = memory
 
+            if tool_name not in self._tools:
+                available = ", ".join(self._tools.keys())
+                logger.error(f"❌ Tool inconnu: {tool_name}. Disponibles: {available}")
+                return {
+                    "success": False,
+                    "error": f"Tool '{tool_name}' non trouvé",
+                    "tool": tool_name
+                }
 
-def call_tool(self, user_query: str, memory=None) -> Dict[str, Any]:
-    try:
-        # 👇 Passer la mémoire au router
-        routing = self._select_tool(user_query, memory)
-        tool_name = routing["tool"]
-        params = routing["params"]
-        params["memory"] = memory
+            tool = self._tools[tool_name]
+            logger.info(f"🔧 MCP → {tool_name}({params})")
+            result = tool["handler"](params)
 
-        if tool_name not in self._tools:
-            available = ", ".join(self._tools.keys())
-            logger.error(f"❌ Tool inconnu: {tool_name}. Disponibles: {available}")
+            return {"success": True, "tool": tool_name, "data": result}
+
+        except Exception as e:
+            logger.error(f"❌ Erreur MCP call_tool: {e}")
             return {
                 "success": False,
-                "error": f"Tool '{tool_name}' non trouvé",
-                "tool": tool_name
+                "error": str(e),
+                "tool": "unknown",
+                "data": {"answer": "وقع مشكل تقني، عاود من فضلك"}
             }
-
-        tool = self._tools[tool_name]
-        logger.info(f"🔧 MCP → {tool_name}({params})")
-        result = tool["handler"](params)
-
-        return {"success": True, "tool": tool_name, "data": result}
-
-    except Exception as e:
-        logger.error(f"❌ Erreur MCP call_tool: {e}")
-        return {
-            "success": False,
-            "error": str(e),
-            "tool": "unknown",
-            "data": {"answer": "وقع مشكل تقني، عاود من فضلك"}
-        }
 
     def list_tools(self) -> List[Dict[str, Any]]:
         return [
@@ -267,10 +251,6 @@ def call_tool(self, user_query: str, memory=None) -> Dict[str, Any]:
             }
             for t in self._tools.values()
         ]
-
-    # ──────────────────────────────────────────────
-    # Handlers
-    # ──────────────────────────────────────────────
 
     def _get_rag_tool(self):
         if not hasattr(self, "_rag_tool_instance"):
@@ -299,7 +279,6 @@ def call_tool(self, user_query: str, memory=None) -> Dict[str, Any]:
         return rag.get_stats()
 
     def _handle_ctm_db_query(self, params: Dict[str, Any]) -> Dict[str, Any]:
-        """Handler pour ctm_db_query — délègue à CTMDatabaseTool.query()"""
         action = params.pop("action", "")
         memory = params.pop("memory", None)
         ctm = self._get_ctm_db_tool()

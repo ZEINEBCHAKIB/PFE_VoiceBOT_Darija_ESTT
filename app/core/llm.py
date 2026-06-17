@@ -40,7 +40,7 @@ class LLMClient:
             raise ValueError("❌ GEMINI_API_KEY_GENERATION manquante")
         self.client_generation = genai.Client(api_key=key_generation)
 
-        self.model = "gemini-3.5-flash"
+        self.model = "gemini-3.1-flash-lite"
         self._initialized = True
         logger.info(f"✅ LLMClient initialisé — 2 clés (traduction + génération)")
 
