@@ -6,7 +6,7 @@ détecter la parole avec Silero VAD, et transcrire avec Wav2Vec2.
 # Ajouter ces lignes EN HAUT du fichier, avant tout import
 from aiohttp import http_websocket
 from dotenv import load_dotenv
-load_dotenv()  # doit être appelé AVANT get_mcp_server()
+load_dotenv()  # doit être appelé AVANT get_mcp_host()
 from app.core.llm import get_llm_client
 import io
 import logging
@@ -576,13 +576,13 @@ async def websocket_call_endpoint(websocket: WebSocket):
                                 else:
                                     logger.info(f"Transcription finale : {transcript}")
 
-                                    from app.mcp_server.server import get_mcp_server
-                                    mcp = get_mcp_server()
+                                    from app.mcp_host import get_mcp_host
+                                    mcp = get_mcp_host()
 
                                     # ── Appel MCP protégé ──
                                     try:
                                         start_ts = time.time()
-                                        rag_result = mcp.call_tool(transcript, memory)
+                                        rag_result = await mcp.call_tool(transcript, memory)
                                         duration_ms = int((time.time() - start_ts) * 1000)
 
                                         if rag_result.get("success"):

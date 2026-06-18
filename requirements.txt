@@ -18,3 +18,5 @@ faster-whisper>=1.0.0
 # Utils
 tqdm>=4.65.0
 numpy>=1.24.0
+
+mcp>=1.2.0
