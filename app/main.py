@@ -98,7 +98,8 @@ class VoiceBotOrchestrator:
         logger.info(f"💬 Pipeline texte démarré: {text[:100]}...")
 
         # ── Étape 2: MCP Host → MCP Server (RAG ou DB) ──
-        mcp_result = await self.mcp.call_tool(text)
+        mcp_result = await self.mcp.orchestrate(text)
+        
 
         if not mcp_result["success"]:
             logger.error(f"❌ Erreur MCP: {mcp_result.get('error')}")

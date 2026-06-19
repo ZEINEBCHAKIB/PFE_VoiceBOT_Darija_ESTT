@@ -454,7 +454,139 @@ class MCPHost:
             "tool": "unknown",
             "data": {"answer": "وقع مشكل تقني، عاود من فضلك"}
         }
+        # À ajouter dans la classe MCPHost, après call_tool()
 
+    async def orchestrate(
+        self,
+        user_query: str,
+        memory: Optional[ConversationMemory] = None
+    ) -> Dict[str, Any]:
+        """
+        Nouveau point d'entrée multi-tools :
+        Planner → Executor (parallèle) → Synthesizer
+
+        Retourne un format compatible avec call_tool() :
+            {"success": bool, "tool": str (CSV si plusieurs), "data": {"answer": str}}
+        """
+        from app.mcp_host.planner import PlannerAgent
+        from app.mcp_host.synthesizer import SynthesizerAgent
+
+        try:
+            # 1. Lazy-start subprocess MCP
+            await self._ensure_started()
+
+            # 2. Découverte des tools via protocole MCP
+            all_mcp_tools = await self._collect_all_tools()
+            if not all_mcp_tools:
+                return self._error_response("Aucun tool MCP disponible")
+
+            # 3. Conversion MCP → Gemini
+            gemini_declarations = self._mcp_to_gemini(all_mcp_tools)
+
+            # 4. PLANNER — décide quels tools appeler
+            planner = PlannerAgent()
+            # Hypothèse : on réutilise le même client Gemini que le host
+            planner.client = self.client
+            planner.model = self.router_model
+
+            plans = await planner.plan(user_query, memory, gemini_declarations)
+
+            if not plans:
+                return {
+                    "success": True,
+                    "tool": "none",
+                    "data": {"answer": "عافاك، عاونني نفهم السؤال ديالك."}
+                }
+
+            # Cas direct (salutation) — pas de tool, pas de synthèse
+            if len(plans) == 1 and plans[0]["name"] == "__direct__":
+                return {
+                    "success": True,
+                    "tool": "direct",
+                    "data": {"answer": plans[0]["args"]["text"]}
+                }
+
+            # 5. EXECUTOR — exécute les N plans en parallèle
+            tool_results = await self._execute_plans(plans, memory, all_mcp_tools)
+
+            # 6. SYNTHESIZER — fusionne les résultats
+            synthesizer = SynthesizerAgent()
+            final_answer = await synthesizer.synthesize(user_query, tool_results)
+
+            # 7. Format de retour compatible avec api.py
+            tools_csv = ", ".join(r["name"] for r in tool_results if r["name"] != "__direct__")
+            return {
+                "success": True,
+                "tool": tools_csv or "none",
+                "data": {"answer": final_answer},
+                "tools_called": [r["name"] for r in tool_results],
+                "plans": plans
+            }
+
+        except Exception as e:
+            logger.error(f"❌ Erreur orchestrate: {e}", exc_info=True)
+            return self._error_response(str(e))
+
+
+    async def _execute_plans(
+        self,
+        plans: List[Dict[str, Any]],
+        memory: Optional[ConversationMemory],
+        all_mcp_tools: List[Dict[str, Any]]
+    ) -> List[Dict[str, Any]]:
+        """Exécute N plans en parallèle via asyncio.gather."""
+        import asyncio
+
+        async def _execute_one(plan: dict) -> dict:
+            tool_name = plan["name"]
+            args = dict(plan["args"])
+
+            # Trouver le server MCP cible
+            target_server = None
+            for t in all_mcp_tools:
+                if t["name"] == tool_name:
+                    target_server = t["server_name"]
+                    break
+
+            if not target_server:
+                return {
+                    "name": tool_name, "args": args,
+                    "result": None, "error": f"Tool {tool_name} non trouvé"
+                }
+
+            # Injecter history_text pour rag_search
+            if (
+                memory and not memory.is_empty()
+                and "history_text" not in args
+                and tool_name == "rag_search"
+            ):
+                args["history_text"] = memory.format_as_text()
+
+            try:
+                session = self._sessions[target_server]
+                logger.info(f"📤 Appel parallèle → {target_server}/{tool_name}")
+                mcp_result = await session.call_tool(tool_name, arguments=args)
+                data = self._parse_mcp_result(mcp_result)
+                return {"name": tool_name, "args": args, "result": data, "error": None}
+            except Exception as e:
+                logger.error(f"❌ Tool {tool_name} a échoué: {e}")
+                return {"name": tool_name, "args": args, "result": None, "error": str(e)}
+
+        # Exécution parallèle
+        tasks = [_execute_one(p) for p in plans]
+        results = await asyncio.gather(*tasks, return_exceptions=True)
+
+        # Gestion des exceptions retournées par gather
+        final = []
+        for plan, res in zip(plans, results):
+            if isinstance(res, Exception):
+                final.append({
+                    "name": plan["name"], "args": plan["args"],
+                    "result": None, "error": str(res)
+                })
+            else:
+                final.append(res)
+        return final
     # ──────────────────────────────────────────────
     # API publique : list_tools (compatibilité main.py)
     # ──────────────────────────────────────────────

@@ -582,7 +582,7 @@ async def websocket_call_endpoint(websocket: WebSocket):
                                     # ── Appel MCP protégé ──
                                     try:
                                         start_ts = time.time()
-                                        rag_result = await mcp.call_tool(transcript, memory)
+                                        rag_result = await mcp.orchestrate(transcript, memory)
                                         duration_ms = int((time.time() - start_ts) * 1000)
 
                                         if rag_result.get("success"):
