@@ -144,7 +144,7 @@ class PlannerAgent:
         contents = self._build_contents(user_query, memory)
 
         try:
-            response = self.client.models.generate_content(
+            response = await self.client.aio.models.generate_content(
                 model=self.model,
                 contents=contents,
                 config=types.GenerateContentConfig(

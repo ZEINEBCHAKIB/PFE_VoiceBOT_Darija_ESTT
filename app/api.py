@@ -582,6 +582,22 @@ async def websocket_call_endpoint(websocket: WebSocket):
                                     # ── Appel MCP protégé ──
                                     try:
                                         start_ts = time.time()
+                                        # Keep-alive : envoie un ping toutes les 2s pendant le traitement long
+                                        async def _keepalive():
+                                            while True:
+                                                await asyncio.sleep(2)
+                                                try:
+                                                    await websocket.send_json({"type": "status", "message": "Processing..."})
+                                                except Exception:
+                                                    break
+
+                                        keepalive_task = asyncio.create_task(_keepalive())
+                                        try:
+                                            rag_result = await mcp.orchestrate(transcript, memory)
+                                        finally:
+                                            keepalive_task.cancel()
+
+                                        duration_ms = int((time.time() - start_ts) * 1000)
                                         rag_result = await mcp.orchestrate(transcript, memory)
                                         duration_ms = int((time.time() - start_ts) * 1000)
 

@@ -484,13 +484,14 @@ class MCPHost:
             gemini_declarations = self._mcp_to_gemini(all_mcp_tools)
 
             # 4. PLANNER — décide quels tools appeler
-            planner = PlannerAgent()
+            #planner = PlannerAgent()
             # Hypothèse : on réutilise le même client Gemini que le host
-            planner.client = self.client
-            planner.model = self.router_model
-
+            #planner.client = self.client
+            #planner.model = self.router_model
+            # ✅ Passer directement le client au constructeur
+            planner = PlannerAgent(client=self.client, model=self.router_model)
             plans = await planner.plan(user_query, memory, gemini_declarations)
-
+            synthesizer = SynthesizerAgent(client=self.client, model=self.router_model)
             if not plans:
                 return {
                     "success": True,
