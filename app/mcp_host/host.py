@@ -454,7 +454,6 @@ class MCPHost:
             "tool": "unknown",
             "data": {"answer": "وقع مشكل تقني، عاود من فضلك"}
         }
-        # À ajouter dans la classe MCPHost, après call_tool()
 
     async def orchestrate(
         self,
@@ -484,14 +483,15 @@ class MCPHost:
             gemini_declarations = self._mcp_to_gemini(all_mcp_tools)
 
             # 4. PLANNER — décide quels tools appeler
-            #planner = PlannerAgent()
-            # Hypothèse : on réutilise le même client Gemini que le host
-            #planner.client = self.client
-            #planner.model = self.router_model
             # ✅ Passer directement le client au constructeur
             planner = PlannerAgent(client=self.client, model=self.router_model)
             plans = await planner.plan(user_query, memory, gemini_declarations)
+
+            # ✅ Une SEULE instanciation du Synthesizer, avec client + model
+            # corrects. (Avant : une 2e instanciation sans paramètres plus bas
+            # écrasait celle-ci et retombait sur un fallback de modèle cassé.)
             synthesizer = SynthesizerAgent(client=self.client, model=self.router_model)
+
             if not plans:
                 return {
                     "success": True,
@@ -511,7 +511,7 @@ class MCPHost:
             tool_results = await self._execute_plans(plans, memory, all_mcp_tools)
 
             # 6. SYNTHESIZER — fusionne les résultats
-            synthesizer = SynthesizerAgent()
+            # (réutilise l'instance créée à l'étape 4, avec client + model corrects)
             final_answer = await synthesizer.synthesize(user_query, tool_results)
 
             # 7. Format de retour compatible avec api.py
@@ -527,7 +527,6 @@ class MCPHost:
         except Exception as e:
             logger.error(f"❌ Erreur orchestrate: {e}", exc_info=True)
             return self._error_response(str(e))
-
 
     async def _execute_plans(
         self,
@@ -588,6 +587,7 @@ class MCPHost:
             else:
                 final.append(res)
         return final
+
     # ──────────────────────────────────────────────
     # API publique : list_tools (compatibilité main.py)
     # ──────────────────────────────────────────────

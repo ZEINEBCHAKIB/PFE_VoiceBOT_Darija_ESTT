@@ -67,16 +67,14 @@ class SynthesizerAgent:
 
     def _build_system_instruction(self) -> str:
         return (
-            "Tu es le Synthesizer Agent d'un call center CTM (transport au Maroc).\n"
-            "Tu reçois une question utilisateur et les résultats de plusieurs tools.\n\n"
-            "Ton rôle : générer UNE SEULE réponse en Darija marocain qui :\n"
-            "1. Synthétise toutes les informations pertinentes des tools\n"
-            "2. Évite les répétitions\n"
-            "3. Reste naturelle et conversationnelle (pas une liste brute)\n"
-            "4. Mentionne les sources d'info si pertinent (ex: 'حسب المواعيد ديال CTM...')\n\n"
-            "Si un tool a échoué, mentionne-le brièvement et utilise les autres.\n"
-            "Si aucun tool n'a été appelé (salutation), réponds naturellement.\n"
-            "Réponds TOUJOURS en Darija marocain, jamais en français."
+            "Tu es le Synthesizer Agent du call center CTM (Maroc). Génère UNE SEULE réponse courte (2-3 phrases max) en Darija marocain fluide à partir des outils.\n"
+            "Tiens compte de l'historique des messages pour une conversation naturelle .\n"
+            "RÈGLES CRUCIALES POUR LE TTS :\n"
+            "1. Écris 'CTM' en texte. Pas de listes à puces ni tirets (fais des phrases liées par 'و' ou 'من بعد').\n"
+            "2. Prix : Écris 'درهم' en toutes lettres après le chiffre (ex: 90 درهم), JAMAIS 'DH'.\n"
+            "3. Horaires/Villes : Utilise le langage oral naturel (ex: 'مع 10 د الصباح', 'كازا', 'مراكش').\n"
+            "4. Zéro Fusha/Français : Pas de mots comme 'هناك', 'لأن', 'رحلة'. Utilise 'كاين', 'علاش', 'كار'.\n"
+            "Si salutation ou aucun outil : réponds brièvement et poliment en Darija."
         )
 
     def _build_user_prompt(
@@ -173,7 +171,7 @@ class SynthesizerAgent:
             return "أهلا وسهلا بيك ف CTM. كيفاش نقدر نعاونك اليوم؟"
 
         # ── Cas 2 : 1 seul tool sans erreur → court-circuit avec "answer" ──
-        # Pas besoin de LLM call — le tool a déjà préparé la réponse
+        # Sauf pour la DB : on force le passage au LLM pour une reformulation naturelle
         if len(tool_results) == 1 and not tool_results[0].get("error"):
             r = tool_results[0]
 
@@ -182,14 +180,14 @@ class SynthesizerAgent:
                 logger.info("⚡ Synthèse court-circuit : réponse directe du Planner")
                 return r["args"].get("text", "كيفاش نعاونك؟")
 
-            # Recherche robuste du champ "answer" dans le résultat MCP
-            answer = self._extract_answer(r.get("result"))
-            if answer:
-                logger.info(
-                    f"⚡ Synthèse court-circuit : 1 tool ({r['name']}) avec "
-                    f"answer trouvé ({len(answer)} chars) — PAS de LLM call"
-                )
-                return answer
+            # ✅ COURT-CIRCUIT UNIQUEMENT pour le RAG (réponse déjà naturelle)
+            # La DB passe TOUJOURS par le LLM pour une reformulation conversationnelle
+            if r["name"] == "rag_search":
+                answer = self._extract_answer(r.get("result"))
+                if answer:
+                    logger.info(f"⚡ Synthèse court-circuit : RAG (answer déjà en darija)")
+                    return answer
+
             else:
                 logger.warning(
                     f"⚠️ Pas de 'answer' trouvé dans le résultat de {r['name']} "
